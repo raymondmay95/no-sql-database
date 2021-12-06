@@ -1,14 +1,14 @@
 import {
-  salesforceHostUrl,
-  salesforceUserName,
-  salesforceUserPassword,
-} from "./src/globalExports";
+  SALESFORCEHOSTURL,
+  SALESFORCEUSERNAME,
+  SALESFORCEUSERPASSWORD,
+} from "../../config/config";
 import jsforce from "jsforce";
 
-async function fetchDataFromSalesforce() {
+export default async function fetchDataFromSalesforce() {
   try {
     console.log("----Establishing Salesforce Connection-----");
-    const conn = new jsforce.Connection({ instanceUrl: salesforceHostUrl });
+    const conn = new jsforce.Connection({ instanceUrl: SALESFORCEHOSTURL });
     conn.on("refresh", function (accessToken, res) {
       console.log(
         `
@@ -18,10 +18,10 @@ async function fetchDataFromSalesforce() {
                 `
       );
     });
-    if (salesforceUserPassword && salesforceUserName) {
+    if (SALESFORCEUSERPASSWORD && SALESFORCEUSERNAME) {
       conn.loginByOAuth2(
-        salesforceUserName,
-        salesforceUserPassword,
+        SALESFORCEUSERNAME,
+        SALESFORCEUSERPASSWORD,
         function (error) {
           const myError = new Error("unable to log into salesforce");
           myError.stack?.concat(error.message);
@@ -33,5 +33,3 @@ async function fetchDataFromSalesforce() {
     return e;
   }
 }
-
-export const conn = fetchDataFromSalesforce();
