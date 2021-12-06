@@ -5,7 +5,7 @@ import {
 } from "./src/globalExports";
 import jsforce from "jsforce";
 
-export default async function fetchDataFromSalesforce() {
+async function fetchDataFromSalesforce() {
   try {
     console.log("----Establishing Salesforce Connection-----");
     const conn = new jsforce.Connection({ instanceUrl: salesforceHostUrl });
@@ -33,3 +33,5 @@ export default async function fetchDataFromSalesforce() {
     return e;
   }
 }
+
+export const conn = fetchDataFromSalesforce();

@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { config } from "dotenv";
 import { doc, getDoc, getFirestore, setDoc } from "@firebase/firestore";
 import firebaseConfig from "./firebaseConfig";
-import { config } from "dotenv";
+// import User from "./userClass";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,7 +16,7 @@ export const firestore = getFirestore(app);
 
 export default async function updateFirestoreUsers(
   email: string,
-  data: Record<any, any>
+  { data }: Record<any, any>
 ) {
   try {
     const docRef = doc(firestore, "Users", email);
@@ -23,7 +24,10 @@ export default async function updateFirestoreUsers(
 
     if (docSnap.exists()) {
       const user = docSnap.data();
-      console.log("document exist", user);
+      // console.log("document exist", user);
+      const keys = Object.keys(user);
+      console.log(keys);
+      return user;
     } else {
       // doc.data() will be undefined in this case
       console.log("No document exist");
@@ -36,4 +40,4 @@ export default async function updateFirestoreUsers(
   }
 }
 
-updateFirestoreUsers("rmay@mauiresortrentals.com", {});
+updateFirestoreUsers("rmay@mauiresortrentals.com", { last_name: "May" });

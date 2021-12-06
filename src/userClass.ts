@@ -13,7 +13,7 @@ export interface UserInterface {
   salesforce_id: string;
 }
 
-export class User {
+export default class User {
   public type: string;
 
   public readonly uuid: string;
