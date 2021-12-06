@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const getFirestoreDoc_1 = __importDefault(require("./utils/functions/getFirestoreDoc"));
 async function entry(email) {
     console.log("---Starting.... Wish me luck :)----");
-    await (0, getFirestoreDoc_1.default)(email);
+    const stepOne = await (0, getFirestoreDoc_1.default)(email);
+    console.log(`getFirestoreDoc ${stepOne}`);
     console.log("---Finished....----");
     return email;
 }

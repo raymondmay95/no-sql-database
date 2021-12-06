@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const firestore_1 = require("@firebase/firestore");
 const config_1 = require("../../config/config");
 const classes_1 = require("../classes");
-async function setData(docRef, email) {
+async function setData(docRef) {
     config_1.DEBUG ? console.log("----No user found in firestore----") : null;
     config_1.DEBUG
         ? console.log("----running setInitialUserToFirestore function----")
@@ -25,9 +25,9 @@ async function setData(docRef, email) {
     await (0, firestore_1.setDoc)(docRef, newUser.properties());
     return true;
 }
-async function setInitialUserToFirestore(email, docRef) {
+async function setInitialUserToFirestore(docRef) {
     try {
-        await setData(docRef, email);
+        await setData(docRef);
         return true;
     }
     catch (error) {

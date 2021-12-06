@@ -14,9 +14,10 @@ async function getFirestoreDoc(email) {
         const docData = await (0, firestore_1.getDoc)(docRef);
         config_1.DEBUG ? console.log(`docData: ${docData}`) : null;
         if (!docData.exists()) {
-            await (0, setInitialUserToFirestore_1.default)(email, docRef);
+            await (0, setInitialUserToFirestore_1.default)(docRef);
+            return true;
         }
-        // in this instance there is no initial user data.
+        // in this instance the user already exist in firestore
         return docData.data();
     }
     catch (error) {

@@ -12,9 +12,10 @@ export default async function getFirestoreDoc(email: string) {
     DEBUG ? console.log(`docData: ${docData}`) : null;
 
     if (!docData.exists()) {
-      await setInitialUserToFirestore(email, docRef);
+      await setInitialUserToFirestore(docRef);
+      return true;
     }
-    // in this instance there is no initial user data.
+    // in this instance the user already exist in firestore
     return docData.data();
   } catch (error) {
     DEBUG ? console.log(error) : null;

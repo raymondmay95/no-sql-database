@@ -2,7 +2,7 @@ import { DocumentReference, setDoc } from "@firebase/firestore";
 import { DEBUG } from "../../config/config";
 import { User } from "../classes";
 
-async function setData(docRef: DocumentReference, email: string) {
+async function setData(docRef: DocumentReference) {
   DEBUG ? console.log("----No user found in firestore----") : null;
   DEBUG
     ? console.log("----running setInitialUserToFirestore function----")
@@ -27,11 +27,10 @@ async function setData(docRef: DocumentReference, email: string) {
 }
 
 export default async function setInitialUserToFirestore(
-  email: string,
   docRef: DocumentReference
 ) {
   try {
-    await setData(docRef, email);
+    await setData(docRef);
     return true;
   } catch (error) {
     DEBUG ? console.error(error) : null;
